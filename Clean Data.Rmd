@@ -1,0 +1,34 @@
+---
+title: "Clean Data"
+author: "yuki"
+date: "2023-04-25"
+output: html_document
+---
+# Library Packages
+```{r Library Packages, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(bruceR)
+```
+
+# Create a NULL list
+```{r Create a NULL list}
+df <- list() # 存放所有的数据集
+out <- list() # 存放所有的结果文件(非图片)
+p <- list() # 存放所有的图片
+```
+
+# Clean Data
+```{r Step1: Read Raw Data}
+df[[1]] <- read.csv("./data/match_raw.csv")
+names(df)[1] <- "Raw"
+```
+
+```{r Step1: Clean Data}
+df[[2]] <- df[[1]] %>%
+  dplyr::group_by(Sub, Shape, Match) %>%
+  dplyr::summarise(RT_mean = mean(RT)) %>%
+  dplyr::ungroup()
+names(df)[2] <- "Clean"
+```
+
