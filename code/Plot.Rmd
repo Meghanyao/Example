@@ -32,5 +32,5 @@ names(p)[1] <- "RainCloud Plot"
 
 p[[1]]
 
-ggsave(filename = "./picture/plot.png",plot = last_plot(), height = 7, width = 10, dpi = 300)
+ggsave(filename = "../picture/plot.png",plot = last_plot(), height = 7, width = 10, dpi = 300)
 ```

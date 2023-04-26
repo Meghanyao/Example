@@ -20,7 +20,7 @@ p <- list() # 存放所有的图片
 
 # Clean Data
 ```{r Step1: Read Raw Data}
-df[[1]] <- read.csv("./data/match_raw.csv")
+df[[1]] <- read.csv("../data/match_raw.csv")
 names(df)[1] <- "Raw"
 ```
 

@@ -15,6 +15,6 @@ out[[1]] <- capture.output({
                    within = c("Shape","Match")) 
   })
 names(out)[1] <- "MANOVA"
-writeLines(out[[1]], "./output/MANOVA.md") 
+writeLines(out[[1]], "../output/MANOVA.md") 
 ```
 
