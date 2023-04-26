@@ -1,0 +1,20 @@
+---
+title: "OUTPUT"
+author: "yuki"
+date: "2023-04-26"
+output: html_document
+---
+# OUTPUT
+## MANOVA
+```{r Within MANOVA}
+# 比较不同Shape和Match条件下平均反应时的差异
+out[[1]] <- capture.output({
+  df[[2]] %>%
+    bruceR::MANOVA(subID = "Sub",
+                   dv = "RT_mean",
+                   within = c("Shape","Match")) 
+  })
+names(out)[1] <- "MANOVA"
+writeLines(out[[1]], "./output/MANOVA.md") 
+```
+

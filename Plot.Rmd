@@ -1,0 +1,36 @@
+---
+title: "Plot"
+author: "yuki"
+date: "2023-04-26"
+output: html_document
+---
+# Plot
+```{r Color Palette}
+popsicle <- c("#F3533A", "#FA9F42", "#8AD879", "#5ACFC9")
+sunset <- c("#C848B9", "#F962A7", "#FD836D", "#FFBA69")
+glassdoor <- c("#3D9A8B", "#2EB19F", "#63C2D2", "#B7EDFF")
+palette <- list(popsicle = popsicle, sunset = sunset, glassdoor = glassdoor)
+rm(popsicle, sunset, glassdoor)
+```
+
+```{r Plot MANOVA}
+p[[1]] <- ggplot2::ggplot(df[[2]], aes(x = Shape, y = RT_mean, fill = interaction(Shape, Match),)) + # fill的颜色基于Shape和Match
+  ggplot2::geom_boxplot(width = 0.1, position = position_nudge(x = -0.05), alpha = 0.5, outlier.color = NA, color = "grey") + # 箱线图
+  ggdist::stat_halfeye(adjust = 0.2,justification = -0.05, alpha = 0.5, width = 0.5, .width = 0, point_colour = NA,) + # 云图
+  ggdist::stat_dots(side = "left",justification = 1.15, alpha = 0.5,) + # 雨图
+  ggplot2::labs(x = "Moral & Identity", y = "Mean of Reaction Time", title = "RainCloud Plot of RT_mean by Moral & Identity") + # 坐标轴标题
+  ggplot2::coord_flip() + # 翻转坐标轴
+  ggplot2::theme(legend.position = "none", # 删除图例
+                 axis.text = element_text(size = 12), # 字体大小
+                 axis.title = element_text(size = 14),
+                 strip.text = element_text(size = 14),
+                 plot.title = element_text(size = 16),) +
+  ggplot2::scale_fill_manual(values = c(palette$sunset, palette$glassdoor)) + # 用palette的颜色填充图片
+  ggplot2::facet_wrap(~Match, ncol = 1) # 按照Match的两种情况画图
+
+names(p)[1] <- "RainCloud Plot"
+
+p[[1]]
+
+ggsave(filename = "./picture/plot.png",plot = last_plot(), height = 7, width = 10, dpi = 300)
+```
