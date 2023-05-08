@@ -32,3 +32,11 @@ df[[2]] <- df[[1]] %>%
 names(df)[2] <- "Clean"
 ```
 
+```{r source Functions}
+source("../functions/Functions.R")
+```
+
+```{r Step1: Clean Data with MyFunction}
+df[[3]] <- myfunction(df = df[[1]], var1 = "Shape", var2 = "Match", y = "RT") 
+names(df)[3] <- "Clean with MyFunction"
+```
